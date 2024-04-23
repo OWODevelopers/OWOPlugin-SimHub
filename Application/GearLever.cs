@@ -20,6 +20,11 @@ namespace OWOPluginSimHub.Application
             if (data.Gear == lastGear) return;
             lastGear = data.Gear;
         
+            FeelGearChange(data);
+        }
+
+        void FeelGearChange(WorldContext data)
+        {
             if (data.Brake > 0 || IsShiftingGear) return;
 
             hapticSystem.Stop();
