@@ -4,7 +4,7 @@ namespace OWOPluginSimHub.Application
 {
     public class SpeedIntensity
     {
-        public int From(WorldContext context)
+        public static int From(WorldContext context)
         {
             if (context.KmHour <= 5) return 0;
             if (context.Brake > 0) return (int)(context.KmHour / 3f);
