@@ -11,7 +11,7 @@ namespace OWOPluginSimHub.Domain
     public class SteeringMusclesBuilder
     {
         public float AccelerationX { get; set; }
-        float SteerIntensity => OWOPluginSimHub.Domain.Math.Clamp((System.Math.Abs(AccelerationX) - 3) / 10f, 0.1f, 0.3f);
+        float SteerIntensity => Math.Clamp((System.Math.Abs(AccelerationX) - 3) / 10f, 0.1f, 0.3f);
         static Muscle[] RightMuscles => new[] { Pectoral_R, Abdominal_R, Arm_R, Lumbar_R, Dorsal_R };
         static Muscle[] LeftMuscles => new[] { Pectoral_L, Abdominal_L, Arm_L, Lumbar_L, Dorsal_L };
         bool TurningLeft => AccelerationX < -3;

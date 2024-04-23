@@ -18,7 +18,7 @@ namespace OWOPluginSimHub.View
 
         public SettingsControlDemo(DataPluginDemo plugin) : this()
         {
-            this.Plugin = plugin;
+            Plugin = plugin;
         }
         
         void Connect(object sender, System.Windows.RoutedEventArgs e)
