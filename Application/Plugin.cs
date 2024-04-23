@@ -1,4 +1,3 @@
-using System.Linq;
 using OWOGame;
 using OWOPluginSimHub.Domain;
 using Math = System.Math;
@@ -12,12 +11,13 @@ namespace OWOPluginSimHub.Application
         readonly HapticSystem hapticSystem;
 
         int KmPerHour => (int)Data.Speed;
+
         public int SpeedIntensity
         {
             get
             {
                 if (KmPerHour <= 5) return 0;
-                if (IsPushingBrake) return (int)(KmPerHour / 3f);
+                if (Data.Brake > 0) return (int)(KmPerHour / 3f);
                 switch (Data.Gear)
                 {
                     case "0":
@@ -33,25 +33,17 @@ namespace OWOPluginSimHub.Application
                 }
             }
         }
-        int BrakeIntensity => IsPushingBrake ? (int)(SpeedIntensity * 1.25f) : 0;
-        bool IsPushingBrake => Data.Brake > 0;
 
-        static Muscle[] SpeedMuscles => new[]
-            { Muscle.Lumbar_L, Muscle.Lumbar_R, Muscle.Dorsal_L, Muscle.Dorsal_R };
-
-        static Muscle[] Abdominal => new[] { Muscle.Abdominal_L, Muscle.Abdominal_R, };
-
-        static Muscle[] BrakeMuscles => new[] { Muscle.Pectoral_L, Muscle.Pectoral_R };
-
-        readonly SteeringMusclesBuilder steeringMuscles = new SteeringMusclesBuilder();
         readonly ImpactSensor impactSensor = new ImpactSensor();
         readonly GearLever lever;
+        readonly Speeddsfas speeddsfas;
 
         public Plugin(HapticSystem hapticSystem)
         {
             this.hapticSystem = hapticSystem;
-        
+
             lever = new GearLever(hapticSystem);
+            speeddsfas = new Speeddsfas(hapticSystem);
         }
 
         public void UpdateFeelingBasedOnWorld()
@@ -74,22 +66,7 @@ namespace OWOPluginSimHub.Application
             if (lever.IsShiftingGear)
                 return;
 
-            SendSensation();
-        }
-
-        void SendSensation()
-        {
-            steeringMuscles.AccelerationX = Data.AccelerationX;
-            
-            var accelerationMuscles = SpeedMuscles.WithIntensity(SpeedIntensity);
-            var abdominal = Abdominal.WithIntensity((int)( SpeedIntensity/2f));
-            var brakeMuscles = BrakeMuscles.WithIntensity((int)Clamp(BrakeIntensity, 0, 70));
-            var allMuscles = accelerationMuscles.Concat(abdominal).Concat(brakeMuscles).ToList();
-
-            var sensation = SensationsFactory.Create(100, 1f, 80);
-            var muscles = steeringMuscles.ApplyDirectionForce(allMuscles);
-
-            hapticSystem.Send(sensation, muscles);
+            speeddsfas.Update(Data);
         }
 
         public static float Clamp(float value, float min, float max) => Math.Max(min, Math.Min(max, value));

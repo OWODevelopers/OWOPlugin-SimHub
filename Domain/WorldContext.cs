@@ -12,6 +12,8 @@ namespace OWOPluginSimHub.Domain
         public string Gear { get; set; }
         public int CurrentEngineRpm { get; set; }
 
+        public int KmHour => (int)Speed;
+
         public static WorldContext From(GameData game)
             => new WorldContext
             {

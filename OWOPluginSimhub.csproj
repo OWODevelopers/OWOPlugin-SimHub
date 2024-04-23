@@ -104,6 +104,7 @@
     <Compile Include="Application\GearLever.cs" />
     <Compile Include="Application\HapticSystem.cs" />
     <Compile Include="Application\Plugin.cs" />
+    <Compile Include="Application\Speeddsfas.cs" />
     <Compile Include="Domain\ImpactSensor.cs" />
     <Compile Include="Domain\MuscleExtensions.cs" />
     <Compile Include="Domain\SteeringMusclesBuilder.cs" />
