@@ -5,6 +5,7 @@ using NUnit.Framework;
 using OWOGame;
 using OWOPluginSimHub.Application;
 using OWOPluginSimHub.Domain;
+using static OWOGame.Sensation;
 
 public class SensationBuilderTests
 {
@@ -12,22 +13,13 @@ public class SensationBuilderTests
     public void Start_cinematic_does_not_feels_like_impact()
     {
         var mock = new MockHapticSystem();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Speed = 100, IsRaceOn = true }
-        };
+        var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld();
+        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 100, IsRaceOn = true });
+        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 0, IsRaceOn = false });
+        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 0, IsRaceOn = true });
 
-        sut.Data = new WorldContext() { Speed = 0, IsRaceOn = false };
-
-        sut.UpdateFeelingBasedOnWorld();
-
-        sut.Data = new WorldContext() { Speed = 0, IsRaceOn = true };
-
-        sut.UpdateFeelingBasedOnWorld();
-
-        mock.Last.ToString().Should().NotBe(Sensation.Ball.ToString());
+        mock.Last.ToString().Should().NotBe(Ball.ToString());
     }
 
     [Test]
