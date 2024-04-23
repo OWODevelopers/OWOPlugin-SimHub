@@ -21,7 +21,7 @@ namespace OWOPluginSimHub.Application
             this.hapticSystem = hapticSystem;
 
             lever = new GearLever(hapticSystem);
-            speeddsfas = new Speeddsfas(hapticSystem);
+            speeddsfas = new Speeddsfas();
         }
 
         public void UpdateFeelingBasedOnWorld()
@@ -44,7 +44,7 @@ namespace OWOPluginSimHub.Application
             if (lever.IsShiftingGear)
                 return;
 
-            speeddsfas.Update(Data);
+            hapticSystem.Send(speeddsfas.Sensation(), speeddsfas.MusclesFrom(Data));
         }
 
         public static float Clamp(float value, float min, float max) => Math.Max(min, Math.Min(max, value));
