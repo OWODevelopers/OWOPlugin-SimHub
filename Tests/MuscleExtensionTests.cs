@@ -1,12 +1,8 @@
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
-using OWOGame;
-using OWOPluginSimHub.Application;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Muscle;
-using Math = System.Math;
-
 
 public class MuscleExtensionTests
 {

@@ -21,9 +21,9 @@ public class SensationBuilderTests
     [Test]
     public void Start_cinematic_does_not_feels_like_impact()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 100));
-        sut.UpdateFeelingBasedOnWorld(OutsideRace());
-        sut.UpdateFeelingBasedOnWorld(DuringRace());
+        sut.Feel(DuringRace(speed: 100));
+        sut.Feel(OutsideRace());
+        sut.Feel(DuringRace());
 
         mock.Last.ToString().Should().NotBe(Ball.ToString());
     }
@@ -31,8 +31,8 @@ public class SensationBuilderTests
     [Test]
     public void Feel_impact_over_acceleration()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 100));
-        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 20));
+        sut.Feel(DuringRace(speed: 100));
+        sut.Feel(DuringRace(speed: 20));
 
         ShouldFeelImpact();
     }
@@ -40,7 +40,7 @@ public class SensationBuilderTests
     [Test]
     public void Stop_sensation_when_swift_gear()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2"));
+        sut.Feel(DuringRace(gear: "2"));
 
         DidNotReceive();
     }
@@ -48,7 +48,7 @@ public class SensationBuilderTests
     [Test]
     public void Avoid_feeling_during_gear_swift()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "3"));
+        sut.Feel(DuringRace(gear: "3"));
 
         DidNotReceive();
     }
@@ -56,8 +56,8 @@ public class SensationBuilderTests
     [Test]
     public void Feel_impact_over_gear_shift()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 200, gear: "2"));
-        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2", speed: 0));
+        sut.Feel(DuringRace(speed: 200, gear: "2"));
+        sut.Feel(DuringRace(gear: "2", speed: 0));
 
         DidReceive();
     }
@@ -65,8 +65,8 @@ public class SensationBuilderTests
     [Test]
     public async Task Gear_shifts_are_not_accumulated()
     {
-        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2"));
-        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "3"));
+        sut.Feel(DuringRace(gear: "2"));
+        sut.Feel(DuringRace(gear: "3"));
 
         await Task.Delay(500);
 

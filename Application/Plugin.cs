@@ -20,7 +20,7 @@ namespace OWOPluginSimHub.Application
             driving = new DrivingMusclesBuilder();
         }
 
-        public void UpdateFeelingBasedOnWorld(WorldContext data)
+        public void Feel(WorldContext data)
         {
             if (!data.IsRaceOn)
             {
@@ -31,7 +31,6 @@ namespace OWOPluginSimHub.Application
 
             if (TryFeelImpact(data)) return;
             if (TryFeelGearShift(data)) return;
-
             FeelDriving(data);
         }
 
