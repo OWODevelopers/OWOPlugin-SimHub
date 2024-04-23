@@ -22,6 +22,12 @@ namespace OWOPluginSimHub.Application
             driving = new DrivingMusclesBuilder();
         }
 
+        public void UpdateFeelingBasedOnWorld(WorldContext Data)
+        {
+            this.Data = Data;
+            UpdateFeelingBasedOnWorld();
+        }
+        
         public void UpdateFeelingBasedOnWorld()
         {
             if (!Data.IsRaceOn)
