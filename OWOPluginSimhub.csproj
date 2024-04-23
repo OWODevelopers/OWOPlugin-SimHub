@@ -107,6 +107,7 @@
     <Compile Include="Application\DrivingMusclesBuilder.cs" />
     <Compile Include="Application\SpeedIntensity.cs" />
     <Compile Include="Domain\ImpactSensor.cs" />
+    <Compile Include="Domain\Math.cs" />
     <Compile Include="Domain\MuscleExtensions.cs" />
     <Compile Include="Domain\SteeringMusclesBuilder.cs" />
     <Compile Include="Domain\WorldContext.cs" />

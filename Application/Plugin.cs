@@ -1,6 +1,7 @@
 using OWOGame;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;
+using static OWOGame.SensationsFactory;
 using Math = System.Math;
 
 namespace OWOPluginSimHub.Application
@@ -48,9 +49,6 @@ namespace OWOPluginSimHub.Application
             hapticSystem.Send(DrivingSensation(), driving.MusclesFrom(Data));
         }
 
-        static MicroSensation DrivingSensation() 
-            => SensationsFactory.Create(100, 1f, 80);
-
-        public static float Clamp(float value, float min, float max) => Math.Max(min, Math.Min(max, value));
+        static MicroSensation DrivingSensation() => Create(100, 1f, 80);
     }
 }

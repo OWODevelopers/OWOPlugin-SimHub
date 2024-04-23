@@ -23,9 +23,9 @@ public class MuscleExtensionTests
     [Test]
     public void Clamp()
     {
-        Plugin.Clamp(10, 0, 5).Should().Be(5);
-        Plugin.Clamp(-1, 0, 5).Should().Be(0);
-        Plugin.Clamp(3, 0, 5).Should().Be(3);
+        OWOPluginSimHub.Domain.Math.Clamp(10, 0, 5).Should().Be(5);
+        OWOPluginSimHub.Domain.Math.Clamp(-1, 0, 5).Should().Be(0);
+        OWOPluginSimHub.Domain.Math.Clamp(3, 0, 5).Should().Be(3);
     }
 
     [Test]
