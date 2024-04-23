@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.SqlServer.Server;
 using NSubstitute;
 using NUnit.Framework;
 using OWOGame;
@@ -39,12 +40,9 @@ public class SensationBuilderTests
     public void Stop_sensation_when_swift_gear()
     {
         var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Gear = "2", IsRaceOn = true }
-        };
+        var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld();
+        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2"));
 
         mock.Received(1).Stop();
     }
@@ -53,16 +51,9 @@ public class SensationBuilderTests
     public void Avoid_feeling_during_gear_swift()
     {
         var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Gear = "2", IsRaceOn = true }
-        };
+        var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld();
-
-        sut.Data = new WorldContext() { Gear = "2", IsRaceOn = true };
-
-        sut.UpdateFeelingBasedOnWorld();
+        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "3"));
 
         mock.Received(0).Send(Arg.Any<Sensation>(), Arg.Any<Muscle[]>());
     }
@@ -71,16 +62,10 @@ public class SensationBuilderTests
     public void Feel_impact_over_gear_shift()
     {
         var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Gear = "2", IsRaceOn = true, Speed = 200 }
-        };
+        var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld();
-
-        sut.Data = new WorldContext() { Gear = "2", IsRaceOn = true, Speed = 0, CurrentEngineRpm = 1 };
-
-        sut.UpdateFeelingBasedOnWorld();
+        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 200, gear: "2"));
+        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2", speed: 0));
 
         mock.Received(1).Send(Arg.Any<Sensation>(), Arg.Any<Muscle[]>());
     }
@@ -89,16 +74,10 @@ public class SensationBuilderTests
     public async Task Gear_shifts_are_not_accumulated()
     {
         var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Gear = "2", IsRaceOn = true }
-        };
+        var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld();
-
-        sut.Data = new WorldContext() { Gear = "3", IsRaceOn = true };
-
-        sut.UpdateFeelingBasedOnWorld();
+        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "2"));
+        sut.UpdateFeelingBasedOnWorld(DuringRace(gear: "3"));
 
         await Task.Delay(500);
 

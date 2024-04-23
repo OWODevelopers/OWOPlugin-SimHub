@@ -7,7 +7,7 @@ namespace OWOPluginSimHub.Application
     {
         readonly HapticSystem hapticSystem;
     
-        string lastGear;
+        string lastGear = "0";
         public bool IsShiftingGear { get; private set; }
 
         public GearLever(HapticSystem hapticSystem)
