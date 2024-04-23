@@ -120,10 +120,10 @@ public class SensationBuilderTests
     [Test]
     public void Feel_initial_acceleration()
     {
-        new SpeedIntensity().From(new WorldContext { Speed = 31 })
+        SpeedIntensity.From(new WorldContext { Speed = 31 })
             .Should().BeGreaterThan
             (
-                new SpeedIntensity().From(new WorldContext { Speed = 27 })
+                SpeedIntensity.From(new WorldContext { Speed = 27 })
             );
     }
 }
