@@ -2,7 +2,6 @@ using OWOGame;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;
 using static OWOGame.SensationsFactory;
-using Math = System.Math;
 
 namespace OWOPluginSimHub.Application
 {
@@ -35,18 +34,22 @@ namespace OWOPluginSimHub.Application
                 return;
             }
 
-            impactSensor.Update(KmPerHour);
-            if (impactSensor.DidImpact)
-            {
-                hapticSystem.Send(Ball, impactSensor.Muscles());
-                return;
-            }
+            if (TryFeelImpact()) return;
 
             lever.Update(Data);
             if (lever.IsShiftingGear)
                 return;
 
             hapticSystem.Send(DrivingSensation(), driving.MusclesFrom(Data));
+        }
+
+        bool TryFeelImpact()
+        {
+            impactSensor.Update(KmPerHour);
+            if (impactSensor.DidImpact) 
+                hapticSystem.Send(Ball, impactSensor.Muscles());
+            
+            return impactSensor.DidImpact;
         }
 
         static MicroSensation DrivingSensation() => Create(100, 1f, 80);
