@@ -8,6 +8,7 @@ namespace OWOPluginSimHub.Application
         {
             if (context.KmHour <= 5) return 0;
             if (context.Brake > 0) return (int)(context.KmHour / 3f);
+            
             switch (context.Gear)
             {
                 case "0":

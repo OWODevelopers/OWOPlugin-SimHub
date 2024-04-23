@@ -15,14 +15,14 @@ namespace OWOPluginSimHub.Application
 
         readonly ImpactSensor impactSensor = new ImpactSensor();
         readonly GearLever lever;
-        readonly Speeddsfas driving;
+        readonly DrivingMusclesBuilder driving;
 
         public Plugin(HapticSystem hapticSystem)
         {
             this.hapticSystem = hapticSystem;
 
             lever = new GearLever(hapticSystem);
-            driving = new Speeddsfas();
+            driving = new DrivingMusclesBuilder();
         }
 
         public void UpdateFeelingBasedOnWorld()

@@ -2,11 +2,10 @@ using System.Linq;
 using OWOGame;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Muscle;
-using static OWOGame.SensationsFactory;
 
 namespace OWOPluginSimHub.Application
 {
-    public class Speeddsfas
+    public class DrivingMusclesBuilder
     {
         static Muscle[] Back => new[] { Lumbar_L, Lumbar_R, Dorsal_L, Dorsal_R };
         static Muscle[] Abdominal => new[] { Abdominal_L, Abdominal_R, };
@@ -14,8 +13,6 @@ namespace OWOPluginSimHub.Application
 
         readonly SteeringMusclesBuilder steeringMuscles = new SteeringMusclesBuilder();
         readonly SpeedIntensity speedIntensity = new SpeedIntensity();
-
-        int BrakeIntensity(WorldContext context) => context.Brake > 0 ? (int)(speedIntensity.From(context) * 1.25f) : 0;
 
         public Muscle[] MusclesFrom(WorldContext context)
         {
@@ -27,5 +24,7 @@ namespace OWOPluginSimHub.Application
             steeringMuscles.AccelerationX = context.AccelerationX;
             return steeringMuscles.ApplyDirectionForce(allMuscles);
         }
+
+        int BrakeIntensity(WorldContext context) => context.Brake > 0 ? (int)(speedIntensity.From(context) * 1.25f) : 0;
     }
 }

@@ -18,12 +18,14 @@ namespace OWOPluginSimHub.Domain
         bool TurningLeft => AccelerationX < -3;
         Muscle[] SteeringMuscles => TurningLeft ? LeftMuscles : AccelerationX > 3 ? RightMuscles : Empty<Muscle>();
         Muscle[] OppositeToSteering => SteeringMuscles.SequenceEqual(RightMuscles) ? LeftMuscles : RightMuscles;
+        bool GoingStraight => SteeringMuscles.Length == 0;
 
         public Muscle[] ApplyDirectionForce(IEnumerable<Muscle> allMuscles)
         {
             if (allMuscles.Contains(Arm_L, Arm_R))
                 throw new ArgumentException("Muscles collection cannot contain arm muscles before applying turn");
-            if (SteeringMuscles.Length == 0)
+            
+            if (GoingStraight)
                 return allMuscles.ToArray();
 
             return AppendArms(allMuscles)
