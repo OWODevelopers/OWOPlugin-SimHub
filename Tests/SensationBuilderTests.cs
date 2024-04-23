@@ -120,16 +120,11 @@ public class SensationBuilderTests
     [Test]
     public void Feel_initial_acceleration()
     {
-        var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Speed = 27, IsRaceOn = true }
-        };
-
-        var accelerationIntensity = new Speeddsfas(mock).SpeedIntensity(new WorldContext() { Speed = 27, IsRaceOn = true });
-        sut.Data = new WorldContext() { Speed = 31, IsRaceOn = true };
-
-        new Speeddsfas(mock).SpeedIntensity(new WorldContext() { Speed = 31, IsRaceOn = true }).Should().BeGreaterThan(accelerationIntensity);
+        new Speeddsfas(Substitute.For<HapticSystem>()).SpeedIntensity(new WorldContext { Speed = 31 })
+            .Should().BeGreaterThan
+            (
+                new Speeddsfas(Substitute.For<HapticSystem>()).SpeedIntensity(new WorldContext { Speed = 27 })
+            );
     }
 
     [Test]
