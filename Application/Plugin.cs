@@ -10,9 +10,6 @@ namespace OWOPluginSimHub.Application
         public WorldContext Data { get; set; }
 
         readonly HapticSystem hapticSystem;
-
-        int KmPerHour => (int)Data.Speed;
-
         readonly ImpactSensor impactSensor = new ImpactSensor();
         readonly GearLever lever;
         readonly DrivingMusclesBuilder driving;
@@ -35,17 +32,22 @@ namespace OWOPluginSimHub.Application
             }
 
             if (TryFeelImpact()) return;
+            if (TryFeelGearShift()) return;
 
+            FeelDriving();
+        }
+
+        void FeelDriving() => hapticSystem.Send(DrivingSensation(), driving.MusclesFrom(Data));
+
+        bool TryFeelGearShift()
+        {
             lever.Update(Data);
-            if (lever.IsShiftingGear)
-                return;
-
-            hapticSystem.Send(DrivingSensation(), driving.MusclesFrom(Data));
+            return lever.IsShiftingGear;
         }
 
         bool TryFeelImpact()
         {
-            impactSensor.Update(KmPerHour);
+            impactSensor.Update(Data.KmHour);
             if (impactSensor.DidImpact) 
                 hapticSystem.Send(Ball, impactSensor.Muscles());
             
