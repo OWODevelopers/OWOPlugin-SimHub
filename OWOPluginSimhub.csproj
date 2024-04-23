@@ -103,11 +103,11 @@
   <ItemGroup>
     <Compile Include="Application\GearLever.cs" />
     <Compile Include="Application\HapticSystem.cs" />
-    <Compile Include="Application\ImpactSensor.cs" />
     <Compile Include="Application\Plugin.cs" />
-    <Compile Include="Application\MuscleExtensions.cs" />
-    <Compile Include="Application\SteeringMusclesBuilder.cs" />
-    <Compile Include="Application\WorldContext.cs" />
+    <Compile Include="Domain\ImpactSensor.cs" />
+    <Compile Include="Domain\MuscleExtensions.cs" />
+    <Compile Include="Domain\SteeringMusclesBuilder.cs" />
+    <Compile Include="Domain\WorldContext.cs" />
     <Compile Include="View\DataPluginDemo.cs" />
     <Compile Include="View\OWOHaptic.cs" />
     <Compile Include="View\SettingsControlDemo.xaml.cs">

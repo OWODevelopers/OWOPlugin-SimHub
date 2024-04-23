@@ -1,11 +1,8 @@
-﻿using OWOGame;
-using SimHub.Plugins.Styles;
-using System;
-using System.Drawing;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Controls;
+using OWOGame;
 
-namespace User.PluginSdkDemo
+namespace OWOPluginSimHub.View
 {
     /// <summary>
     /// Logique d'interaction pour SettingsControlDemo.xaml

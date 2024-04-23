@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OWOGame;
+using OWOPluginSimHub.Application;
 using Math = System.Math;
 
-namespace OWOPlugin
+namespace OWOPluginSimHub.Domain
 {
     public class SteeringMusclesBuilder
     {

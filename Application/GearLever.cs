@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
+using OWOPluginSimHub.Domain;
 
-namespace OWOPlugin
+namespace OWOPluginSimHub.Application
 {
     public class GearLever
     {

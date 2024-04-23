@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using OWOGame;
 
-namespace OWOPlugin
+namespace OWOPluginSimHub.Domain
 {
     public static class MuscleExtensions
     {

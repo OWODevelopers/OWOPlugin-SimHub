@@ -1,11 +1,10 @@
 using OWOGame;
+using OWOPluginSimHub.Application;
 
-namespace OWOPlugin
+namespace OWOPluginSimHub.View
 {
     public class OWOHaptic : HapticSystem
     {
-        public bool IsConnected { get; }
-
         public void Send(Sensation sensation, Muscle[] muscles)
         {
             OWO.Send(sensation, muscles);
@@ -14,11 +13,6 @@ namespace OWOPlugin
         public void Stop()
         {
             OWO.Stop();
-        }
-
-        public void Connect()
-        {
-            OWO.AutoConnect();
         }
     }
 }

@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
 using FluentAssertions;
-using OWOPlugin;
 using NSubstitute;
 using NUnit.Framework;
 using OWOGame;
+using OWOPluginSimHub.Application;
+using OWOPluginSimHub.Domain;
 
 public class SensationBuilderTests
 {

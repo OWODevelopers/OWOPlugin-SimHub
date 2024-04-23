@@ -1,5 +1,5 @@
-﻿using OWOPlugin;
-using OWOGame;
+﻿using OWOGame;
+using OWOPluginSimHub.Application;
 
 public class MockHapticSystem : HapticSystem
 {

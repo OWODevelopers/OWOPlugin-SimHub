@@ -1,6 +1,4 @@
-using System;
-
-namespace OWOPlugin
+namespace OWOPluginSimHub.Domain
 {
     public class ImpactSensor
     {
