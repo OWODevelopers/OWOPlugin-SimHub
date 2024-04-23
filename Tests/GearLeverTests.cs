@@ -4,6 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using OWOPluginSimHub.Application;
 using OWOPluginSimHub.Domain;
+using static WorldContextBuilder;
 
 public class GearLeverTests
 {
@@ -11,7 +12,9 @@ public class GearLeverTests
     public void Gear_is_shifting()
     {
         var sut = new GearLever(Substitute.For<HapticSystem>());
-        sut.Update(new WorldContext() { Gear = "1" });
+        
+        sut.Update(DuringRace(gear: "1"));
+        
         sut.IsShiftingGear.Should().BeTrue();
     }
 
@@ -20,8 +23,9 @@ public class GearLeverTests
     {
         var mock = Substitute.For<HapticSystem>();
         var sut = new GearLever(mock);
-        sut.Update(new WorldContext() { Gear = "1" });
-        sut.Update(new WorldContext() { Gear = "2" });
+        
+        sut.Update(DuringRace(gear:"1"));
+        sut.Update(DuringRace(gear:"2"));
 
         mock.Received(1).Stop();
     }
@@ -32,9 +36,9 @@ public class GearLeverTests
         var mock = Substitute.For<HapticSystem>();
         var sut = new GearLever(mock);
 
-        sut.Update(new WorldContext() { Gear = "1" });
+        sut.Update(DuringRace(gear:"1"));
         await Task.Delay(350);
-        sut.Update(new WorldContext() { Gear = "2" });
+        sut.Update(DuringRace(gear:"2"));
 
         mock.Received(2).Stop();
     }
@@ -45,10 +49,10 @@ public class GearLeverTests
         var mock = Substitute.For<HapticSystem>();
         var sut = new GearLever(mock);
 
-        sut.Update(new WorldContext() { Gear = "1" });
-        sut.Update(new WorldContext() { Gear = "2" });
+        sut.Update(DuringRace(gear:"1"));
+        sut.Update(DuringRace(gear:"2"));
         await Task.Delay(350);
-        sut.Update(new WorldContext() { Gear = "2" });
+        sut.Update(DuringRace(gear:"2"));
 
         mock.Received(1).Stop();
     }
