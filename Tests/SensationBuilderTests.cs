@@ -126,10 +126,10 @@ public class SensationBuilderTests
             Data = new WorldContext() { Speed = 27, IsRaceOn = true }
         };
 
-        var accelerationIntensity = sut.SpeedIntensity;
+        var accelerationIntensity = new Speeddsfas(mock).SpeedIntensity(new WorldContext() { Speed = 27, IsRaceOn = true });
         sut.Data = new WorldContext() { Speed = 31, IsRaceOn = true };
 
-        sut.SpeedIntensity.Should().BeGreaterThan(accelerationIntensity);
+        new Speeddsfas(mock).SpeedIntensity(new WorldContext() { Speed = 31, IsRaceOn = true }).Should().BeGreaterThan(accelerationIntensity);
     }
 
     [Test]
@@ -141,9 +141,9 @@ public class SensationBuilderTests
             Data = new WorldContext() { Gear = "3", Speed = 27, IsRaceOn = true }
         };
 
-        var accelerationIntensity = sut.SpeedIntensity;
+        var accelerationIntensity = new Speeddsfas(mock).SpeedIntensity(sut.Data);
         sut.Data = new WorldContext() { Gear = "3", Speed = 31, IsRaceOn = true };
 
-        sut.SpeedIntensity.Should().BeGreaterThan(accelerationIntensity);
+        new Speeddsfas(mock).SpeedIntensity(sut.Data).Should().BeGreaterThan(accelerationIntensity);
     }
 }
