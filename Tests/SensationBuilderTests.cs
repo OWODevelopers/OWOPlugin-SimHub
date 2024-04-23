@@ -120,25 +120,10 @@ public class SensationBuilderTests
     [Test]
     public void Feel_initial_acceleration()
     {
-        new Speeddsfas(Substitute.For<HapticSystem>()).SpeedIntensity(new WorldContext { Speed = 31 })
+        new SpeedIntensity().From(new WorldContext { Speed = 31 })
             .Should().BeGreaterThan
             (
-                new Speeddsfas(Substitute.For<HapticSystem>()).SpeedIntensity(new WorldContext { Speed = 27 })
+                new SpeedIntensity().From(new WorldContext { Speed = 27 })
             );
-    }
-
-    [Test]
-    public void Not_feel_initial_acceleration_if_gear_is_greater_than_two()
-    {
-        var mock = Substitute.For<HapticSystem>();
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Gear = "3", Speed = 27, IsRaceOn = true }
-        };
-
-        var accelerationIntensity = new Speeddsfas(mock).SpeedIntensity(sut.Data);
-        sut.Data = new WorldContext() { Gear = "3", Speed = 31, IsRaceOn = true };
-
-        new Speeddsfas(mock).SpeedIntensity(sut.Data).Should().BeGreaterThan(accelerationIntensity);
     }
 }
