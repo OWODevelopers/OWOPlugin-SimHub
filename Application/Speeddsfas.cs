@@ -1,15 +1,16 @@
 using System.Linq;
 using OWOGame;
 using OWOPluginSimHub.Domain;
+using static OWOGame.Muscle;
 using static OWOGame.SensationsFactory;
 
 namespace OWOPluginSimHub.Application
 {
     public class Speeddsfas
     {
-        static Muscle[] Back => new[] { Muscle.Lumbar_L, Muscle.Lumbar_R, Muscle.Dorsal_L, Muscle.Dorsal_R };
-        static Muscle[] Abdominal => new[] { Muscle.Abdominal_L, Muscle.Abdominal_R, };
-        static Muscle[] Pectorals => new[] { Muscle.Pectoral_L, Muscle.Pectoral_R };
+        static Muscle[] Back => new[] { Lumbar_L, Lumbar_R, Dorsal_L, Dorsal_R };
+        static Muscle[] Abdominal => new[] { Abdominal_L, Abdominal_R, };
+        static Muscle[] Pectorals => new[] { Pectoral_L, Pectoral_R };
 
         readonly SteeringMusclesBuilder steeringMuscles = new SteeringMusclesBuilder();
         readonly SpeedIntensity speedIntensity = new SpeedIntensity();
@@ -26,7 +27,5 @@ namespace OWOPluginSimHub.Application
             steeringMuscles.AccelerationX = context.AccelerationX;
             return steeringMuscles.ApplyDirectionForce(allMuscles);
         }
-
-        public MicroSensation Sensation() => Create(100, 1f, 80);
     }
 }

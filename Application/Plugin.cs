@@ -44,8 +44,11 @@ namespace OWOPluginSimHub.Application
             if (lever.IsShiftingGear)
                 return;
 
-            hapticSystem.Send(speeddsfas.Sensation(), speeddsfas.MusclesFrom(Data));
+            hapticSystem.Send(DrivingSensation(), speeddsfas.MusclesFrom(Data));
         }
+
+        static MicroSensation DrivingSensation() 
+            => SensationsFactory.Create(100, 1f, 80);
 
         public static float Clamp(float value, float min, float max) => Math.Max(min, Math.Min(max, value));
     }
