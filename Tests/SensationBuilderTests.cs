@@ -6,6 +6,13 @@ using OWOGame;
 using OWOPluginSimHub.Application;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;
+using static WorldContextBuilder;
+
+public static class WorldContextBuilder
+{
+    public static WorldContext DuringRace(float speed = 0) => new WorldContext() { IsRaceOn = true, Speed = speed };
+    public static WorldContext OutsideRace() => new WorldContext() { IsRaceOn = false};
+}
 
 public class SensationBuilderTests
 {
@@ -15,9 +22,9 @@ public class SensationBuilderTests
         var mock = new MockHapticSystem();
         var sut = new Plugin(mock);
 
-        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 100, IsRaceOn = true });
-        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 0, IsRaceOn = false });
-        sut.UpdateFeelingBasedOnWorld(new WorldContext() { Speed = 0, IsRaceOn = true });
+        sut.UpdateFeelingBasedOnWorld(DuringRace(speed: 100));
+        sut.UpdateFeelingBasedOnWorld(OutsideRace());
+        sut.UpdateFeelingBasedOnWorld(DuringRace());
 
         mock.Last.ToString().Should().NotBe(Ball.ToString());
     }
