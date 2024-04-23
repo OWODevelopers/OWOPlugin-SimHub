@@ -1,3 +1,6 @@
+using OWOGame;
+using static OWOGame.Muscle;
+
 namespace OWOPluginSimHub.Domain
 {
     public class ImpactSensor
@@ -21,12 +24,11 @@ namespace OWOPluginSimHub.Domain
                 return 0;
             if (speedDifference < 100)
                 return 80;
+            
             return 100;
         }
 
-        public void Reset()
-        {
-            lastVelocity = 0;
-        }
+        public Muscle[] Muscles() => All.WithIntensity(Intensity());
+        public void Reset() => lastVelocity = 0;
     }
 }

@@ -19,9 +19,9 @@ namespace OWOPluginSimHub.Application
 
         public Muscle[] MusclesFrom(WorldContext context)
         {
-            var backInSeat = Back.WithIntensity(speedIntensity.From(context));
             var front = Abdominal.WithIntensity((int)(speedIntensity.From(context) / 2f));
             var brakeMuscles = Pectorals.WithIntensity((int)Plugin.Clamp(BrakeIntensity(context), 0, 70));
+            var backInSeat = Back.WithIntensity(speedIntensity.From(context));
             var allMuscles = backInSeat.Concat(front).Concat(brakeMuscles).ToList();
 
             steeringMuscles.AccelerationX = context.AccelerationX;
