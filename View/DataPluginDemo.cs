@@ -20,8 +20,7 @@ namespace OWOPluginSimHub.View
 
         public void DataUpdate(PluginManager pluginManager, ref GameData data)
         {
-            plugin.Data = WorldContext.From(data);
-            plugin.UpdateFeelingBasedOnWorld();
+            plugin.UpdateFeelingBasedOnWorld(WorldContext.From(data));
         }
 
         public System.Windows.Controls.Control GetWPFSettingsControl(PluginManager pluginManager)
