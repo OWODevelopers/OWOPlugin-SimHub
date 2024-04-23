@@ -14,6 +14,7 @@ public class MockHapticSystem : HapticSystem
 
     public void Stop()
     {
+        Last = null;
     }
 
     public void Connect()
