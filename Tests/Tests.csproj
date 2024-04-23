@@ -69,6 +69,7 @@
         <Compile Include="MuscleExtensionTests.cs" />
         <Compile Include="SensationBuilderTests.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="WorldContextBuilder.cs" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\OWOPluginSimhub.csproj">

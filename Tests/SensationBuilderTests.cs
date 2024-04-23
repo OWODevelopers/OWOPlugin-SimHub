@@ -8,12 +8,6 @@ using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;
 using static WorldContextBuilder;
 
-public static class WorldContextBuilder
-{
-    public static WorldContext DuringRace(float speed = 0) => new WorldContext() { IsRaceOn = true, Speed = speed };
-    public static WorldContext OutsideRace() => new WorldContext() { IsRaceOn = false};
-}
-
 public class SensationBuilderTests
 {
     [Test]
@@ -32,18 +26,13 @@ public class SensationBuilderTests
     [Test]
     public void Feel_impact_over_acceleration()
     {
-        var mock = Substitute.For<HapticSystem>();
+        var mock = new MockHapticSystem();
+        var sut = new Plugin(mock);
 
-        var sut = new Plugin(mock)
-        {
-            Data = new WorldContext() { Speed = 100, IsRaceOn = true }
-        };
+        sut.UpdateFeelingBasedOnWorld(DuringRace(speed:100));
+        sut.UpdateFeelingBasedOnWorld(DuringRace(speed:20));
 
-        sut.Data = new WorldContext() { Speed = 20, IsRaceOn = true };
-
-        sut.UpdateFeelingBasedOnWorld();
-
-        mock.Received(1).Send(Arg.Any<Sensation>(), Arg.Any<Muscle[]>());
+        mock.Last.ToString().Should().Be(Ball.ToString());
     }
 
     [Test]
