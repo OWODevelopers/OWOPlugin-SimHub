@@ -1,10 +1,6 @@
 using System.Threading.Tasks;
 using FluentAssertions;
-using FluentAssertions.Primitives;
-using Microsoft.SqlServer.Server;
-using NSubstitute;
 using NUnit.Framework;
-using OWOGame;
 using OWOPluginSimHub.Application;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;

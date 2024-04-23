@@ -64,6 +64,7 @@
         <Reference Include="System.Xml.Linq" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="GearLeverTests.cs" />
         <Compile Include="ImpactSensorTests.cs" />
         <Compile Include="MockHapticSystem.cs" />
         <Compile Include="MuscleExtensionTests.cs" />
