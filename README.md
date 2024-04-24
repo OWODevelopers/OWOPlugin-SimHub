@@ -1,5 +1,5 @@
 # OWO plugin for SimHub
-#### What is the OWO Skin? :apuntando_hacia_arriba:
+#### What is the OWO Skin? 👆
 OWO skin is an haptic suit that let you feel a game while you are playing.
 You will find more info [here](https://owogame.com/).
 #### This plugin includes the following **features**:
@@ -14,7 +14,7 @@ We encourage you to **contribute**, adapt and create
 new experiencies for all the users that use OWO plugin
 for SimHub, so feel free to make a **pull request** with new features!
 
-#### How to import this plugin :llamando:
+#### How to import this plugin 📲
 To connect this plugin with your OWO Skin follow the next steps:
 - Download [SimHub](https://www.simhubdash.com/)
 - Build or download our SimHub plugin
