@@ -16,7 +16,7 @@ for SimHub, so feel free to make a **pull request** with new features!
 ### How to import this plugin 📲
 To connect this plugin with your OWO Skin follow the next steps:
 - Download [SimHub](https://www.simhubdash.com/)
-- Build or download our SimHub plugin
+- Build or [download](https://github.com/OWODevelopers/OWOPlugin-SimHub/releases) our SimHub plugin
     - Place the OWO.dll and OWOPluginSimhub.dll in the SimHub's root directory.
     - Open SimHub and enable the OWO Integration plugin (it will be requested just by opening SimHub).
 - Navigate to the OWO tab from SimHub (located at the left side).
