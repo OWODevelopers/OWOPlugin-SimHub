@@ -20,16 +20,17 @@ namespace OWOPluginSimHub.View
         {
             Plugin = plugin;
         }
-        
+
         void Connect(object sender, System.Windows.RoutedEventArgs e)
         {
-                OWO.AutoConnect();
+            OWO.Configure(GameAuth.Empty.WithId("7746550"));
+            OWO.AutoConnect();
 
-                ConnectionStatus.Text = "Looking for an OWO Skin";
-                DisconnectButton.Visibility = System.Windows.Visibility.Visible;
-                ConnectButton.Visibility = System.Windows.Visibility.Collapsed;
+            ConnectionStatus.Text = "Looking for an OWO Skin";
+            DisconnectButton.Visibility = System.Windows.Visibility.Visible;
+            ConnectButton.Visibility = System.Windows.Visibility.Collapsed;
 
-                WaitForConnection();
+            WaitForConnection();
         }
 
         void Disconnect(object sender, System.Windows.RoutedEventArgs e)
@@ -43,7 +44,7 @@ namespace OWOPluginSimHub.View
 
         async void WaitForConnection()
         {
-            while (OWO.ConnectionState != ConnectionState.Connected) 
+            while (OWO.ConnectionState != ConnectionState.Connected)
             {
                 await Task.Delay(1000);
             }
