@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using OWOGame;
 using OWOPluginSimHub.Domain;
 using static OWOGame.Sensation;
@@ -5,6 +6,27 @@ using static OWOGame.SensationsFactory;
 
 namespace OWOPluginSimHub.Application
 {
+    public class PluginWrapper
+    {
+        Plugin plugin;
+        public WorldContext data;
+
+        public PluginWrapper(Plugin plugin)
+        {
+            this.plugin = plugin;
+        }
+
+
+        public async Task Feel()
+        {
+            while (true)
+            {
+                plugin.Feel(data);
+                await Task.Delay(100);
+            }
+        }
+    }
+    
     public class Plugin
     {
         readonly HapticSystem hapticSystem;
